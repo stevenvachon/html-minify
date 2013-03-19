@@ -1,6 +1,6 @@
 <?php
 /*
-HTML Minify 0.5.4 <http://www.svachon.com/blog/html-minify/>
+HTML Minify 0.5.5 <http://www.svachon.com/blog/html-minify/>
 Reduce file size by shortening URLs and safely removing all standard comments and unnecessary white space from an HTML document.
 */
 
@@ -74,7 +74,11 @@ class HTML_Minify
 	{
 		$pattern = '/<(?<script>script).*?<\/script\s*>|<(?<style>style).*?<\/style\s*>|<!(?<comment>--).*?-->|<(?<tag>[\/\w.:-]*)(?:".*?"|\'.*?\'|[^\'">]+)*>|(?<text>((<[^!\/\w.:-])?[^<]*)+)|/si';
 		
-		preg_match_all($pattern, $html, $matches, PREG_SET_ORDER);
+		if (preg_match_all($pattern, $html, $matches, PREG_SET_ORDER) === false)
+		{
+			// Invalid markup
+			return $html;
+		}
 		
 		$overriding = false;
 		$raw_tag = false;
@@ -179,7 +183,7 @@ class HTML_Minify
 			// Relate URLs
 			if ($relate && $this->shorten_urls)
 			{
-				$content = preg_replace_callback('/(action|href|src)=(?:"([^"]*)"|\'([^\']*)\')/i', array(&$this,'callback_HTML_URLs'), $content);
+				$content = preg_replace_callback('/(action|data|href|src)=(?:"([^"]*)"|\'([^\']*)\')/i', array(&$this,'callback_HTML_URLs'), $content);
 			}
 			
 			if ($strip)

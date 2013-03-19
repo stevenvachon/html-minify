@@ -1,6 +1,6 @@
 <?php
 /*
-Absolute-to-Relative URLs 0.3.1 <http://www.svachon.com/blog/absolute-to-relative-urls/>
+Absolute-to-Relative URLs 0.3.2 <http://www.svachon.com/blog/absolute-to-relative-urls/>
 A class for use in shortening URL links.
 */
 
@@ -307,7 +307,12 @@ class Absolute_to_Relative_URLs
 	*/
 	protected function parse_url($url, $init=false)
 	{
-		if (strpos($url, '//') === 0)
+		if (strpos($url, 'data:') === 0)
+		{
+			// Nothing can be done with a data URI
+			return false;
+		}
+		else if (strpos($url, '//') === 0)
 		{
 			// Cannot parse scheme-relative URLs with parse_url
 			$url = $this->site_url['scheme'] . ':' . $url;
@@ -468,7 +473,7 @@ class Absolute_to_Relative_URLs
 			
 			if ($url === false)
 			{
-				// Unknown format
+				// Unusable format
 				return $original_url;
 			}
 		}
