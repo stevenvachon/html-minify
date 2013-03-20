@@ -1,6 +1,6 @@
 <?php
 /*
-HTML Minify 0.5.5 <http://www.svachon.com/blog/html-minify/>
+HTML Minify 0.5.6 <http://www.svachon.com/blog/html-minify/>
 Reduce file size by shortening URLs and safely removing all standard comments and unnecessary white space from an HTML document.
 */
 
@@ -93,6 +93,7 @@ class HTML_Minify
 			$content = $token[0];
 			
 			$relate = false;
+			$strip = false;
 			
 			if (is_null($tag))
 			{
@@ -125,6 +126,7 @@ class HTML_Minify
 						$content = preg_replace('/<!--(?!\s*(?:\[if [^\]]+]|<!|>))(?:(?!-->).)*-->/s', '', $content);
 						
 						$relate = true;
+						$strip = true;
 					}
 				}
 			}
@@ -138,11 +140,7 @@ class HTML_Minify
 				{
 					$raw_tag = false;
 				}
-				else if ($raw_tag || $overriding)
-				{
-					$strip = false;
-				}
-				else
+				else if (!$raw_tag && !$overriding)
 				{
 					if ($tag !== '')
 					{

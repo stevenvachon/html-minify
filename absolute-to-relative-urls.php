@@ -1,6 +1,6 @@
 <?php
 /*
-Absolute-to-Relative URLs 0.3.2 <http://www.svachon.com/blog/absolute-to-relative-urls/>
+Absolute-to-Relative URLs 0.3.3 <http://www.svachon.com/blog/absolute-to-relative-urls/>
 A class for use in shortening URL links.
 */
 
@@ -307,9 +307,9 @@ class Absolute_to_Relative_URLs
 	*/
 	protected function parse_url($url, $init=false)
 	{
-		if (strpos($url, 'data:') === 0)
+		if ( stripos($url,'data:')===0 || stripos($url,'javascript:')===0 )
 		{
-			// Nothing can be done with a data URI
+			// Nothing can be done with data/javascript URIs
 			return false;
 		}
 		else if (strpos($url, '//') === 0)
