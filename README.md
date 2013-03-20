@@ -1,8 +1,10 @@
 # HTML Minify
 
+This class does not require a CMS like WordPress, but there is a [WordPress version](http://wordpress.org/extend/plugins/wp-html-compression/) available.
+
 ## FAQ & Changelog
 
-[http://wordpress.org/extend/plugins/wp-html-compression/](http://wordpress.org/extend/plugins/wp-html-compression/)
+To minimize maintenance, check out the info at the WordPress plugin page: [http://wordpress.org/extend/plugins/wp-html-compression/](http://wordpress.org/extend/plugins/wp-html-compression/)
 
 ## Example Usage
 
