@@ -1,6 +1,6 @@
 <?php
 /*
-Absolute-to-Relative URLs 0.3.3 <http://www.svachon.com/blog/absolute-to-relative-urls/>
+Absolute-to-Relative URLs 0.3.4 <http://www.svachon.com/blog/absolute-to-relative-urls/>
 A class for use in shortening URL links.
 */
 
@@ -465,6 +465,10 @@ class Absolute_to_Relative_URLs
 			else if ($url === '/')
 			{
 				return '/';
+			}
+			else if ($url === '#')
+			{
+				return '#';
 			}
 			
 			$original_url = $url;
